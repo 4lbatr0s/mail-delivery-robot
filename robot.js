@@ -1,1 +1,39 @@
 //indeed
+
+//Meadowfield is a place consists of 11 places and 14 roads between them.
+
+const roads = [
+    "Alice's House-Bob's House",
+    "Alice's House-Post Office",
+    "Daria's House-Ernie's House",
+    "Ernie's House-Grete's House",
+    "Grete's House-Shop",
+    "Marketplace-Post Office",
+    "Marketplace-Town Hall",
+    "Alice's House-Cabin",
+    "Bob's House-Town Hall",
+    "Daria's House-Town Hall",
+    "Grete's House-Farm",
+    "Marketplace-Farm",
+    "Marketplace-Shop",
+    "Shop-Town Hall"
+]; 
+
+//We are going to create a graph of points(places) and edges(roads) of Meadowfield. 
+
+function buildGraph(edges) {
+    let graph = Object.create(null); //create graph as an empty object.
+    function addEdge(from, to) { 
+    if (graph[from] == null) {
+    graph[from] = [to];
+    } else {
+    graph[from].push(to);
+    }
+    }
+    for (let [from, to] of edges.map(r => r.split("-"))) {
+    addEdge(from, to);
+    addEdge(to, from);
+    }
+    return graph;
+    }
+    const roadGraph = buildGraph(roads);
